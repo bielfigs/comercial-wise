@@ -9,7 +9,6 @@
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
 <link rel="manifest" href="/site.webmanifest">
-  <script src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <style>
     :root {
@@ -292,6 +291,110 @@
     .hist-sum-lbl { font-size:10px; color:var(--text-dim); font-weight:600; text-transform:uppercase; letter-spacing:.5px; margin-bottom:4px; }
     .hist-sum-val { font-size:22px; font-weight:800; color:var(--white); }
     .hist-sum-sub { font-size:11px; color:var(--text-dim); margin-top:2px; }
+
+    /* ─── FONT BUMPS ─── */
+    .alert { font-size:14px !important; }
+    .box-sub { font-size:13px !important; }
+    .fg input[type=text], .fg textarea, .fg select { font-size:14px !important; }
+    .btn { font-size:14px !important; }
+    .tbl td { font-size:14px !important; }
+    .p-row { font-size:14px !important; }
+    .p-imob { font-size:13px !important; }
+    .p-del-btn { font-size:14px !important; }
+    .filter-btn { font-size:13px !important; }
+    .save-ok { font-size:14px !important; }
+    .kpi-sub { font-size:13px !important; }
+    .box-title { font-size:15px !important; }
+
+    /* ─── PROSPECT DETAIL PANEL ─── */
+    .p-overlay {
+      display:none; position:fixed; inset:0;
+      background:rgba(0,0,0,.6); z-index:300;
+    }
+    .p-overlay.open { display:block; }
+    .p-panel {
+      position:fixed; right:0; top:0; bottom:0; width:440px;
+      background:#111f14; border-left:1px solid var(--border);
+      z-index:301; overflow-y:auto; padding:0;
+      transform:translateX(100%); transition:transform .28s cubic-bezier(.4,0,.2,1);
+      display:flex; flex-direction:column;
+    }
+    .p-panel.open { transform:translateX(0); }
+    .p-panel-header {
+      padding:20px 22px 16px;
+      border-bottom:1px solid var(--border);
+      position:sticky; top:0; background:#111f14; z-index:1;
+      display:flex; align-items:flex-start; justify-content:space-between; gap:10px;
+    }
+    .p-panel-close {
+      background:none; border:none; color:var(--text-dim); cursor:pointer;
+      font-size:20px; padding:2px 6px; border-radius:6px;
+      transition:color .2s; flex-shrink:0; line-height:1;
+    }
+    .p-panel-close:hover { color:var(--white); }
+    .p-panel-body { padding:20px 22px; flex:1; }
+    .p-panel-company { font-size:20px; font-weight:800; color:var(--white); margin-bottom:4px; line-height:1.2; }
+    .p-panel-contact { font-size:14px; color:var(--text-dim); margin-bottom:10px; }
+    .p-panel-badges { display:flex; gap:6px; flex-wrap:wrap; margin-bottom:20px; }
+    .p-panel-section { margin-bottom:20px; }
+    .p-panel-section-title {
+      font-size:10px; font-weight:700; letter-spacing:1.2px; text-transform:uppercase;
+      color:var(--text-dim); margin-bottom:10px; border-bottom:1px solid var(--border); padding-bottom:6px;
+    }
+    .p-panel-row {
+      display:flex; align-items:flex-start; gap:10px;
+      padding:7px 0; border-bottom:1px solid rgba(65,203,99,.05);
+      font-size:13px;
+    }
+    .p-panel-row:last-child { border-bottom:none; }
+    .p-panel-row-lbl { color:var(--text-dim); width:110px; flex-shrink:0; font-size:12px; padding-top:1px; }
+    .p-panel-row-val { color:var(--white); font-weight:500; flex:1; word-break:break-word; }
+    .p-panel-row-val a { color:var(--verde); text-decoration:none; }
+    .p-panel-row-val a:hover { text-decoration:underline; }
+    .p-panel-next-action {
+      background:var(--card2); border:1px solid var(--border); border-radius:10px;
+      padding:13px 16px; margin-bottom:14px;
+    }
+    .p-panel-next-action-lbl { font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.8px; color:var(--verde); margin-bottom:6px; }
+    .p-panel-next-action-val { font-size:14px; color:var(--white); line-height:1.4; }
+    .p-panel-notes {
+      background:rgba(65,203,99,.04); border:1px solid var(--border); border-radius:10px;
+      padding:12px 14px; margin-bottom:18px; font-size:13px; color:var(--text); line-height:1.65;
+    }
+    .p-panel-hist-item {
+      display:flex; align-items:center; gap:10px;
+      padding:5px 0; font-size:12px; color:var(--text-dim);
+    }
+    .p-panel-hist-dot {
+      width:8px; height:8px; border-radius:50%; background:var(--verde); flex-shrink:0;
+    }
+    .p-panel-hist-dot.dot-dim { background:rgba(107,143,117,.4); }
+    .p-panel-actions {
+      padding:14px 22px 22px;
+      border-top:1px solid var(--border);
+      display:flex; gap:8px; flex-wrap:wrap;
+      position:sticky; bottom:0; background:#111f14;
+    }
+    .p-row-clickable { cursor:pointer; }
+    .p-row-clickable:hover { background:rgba(65,203,99,.07) !important; }
+
+    /* ─── EDIT MODAL ─── */
+    .edit-overlay {
+      display:none; position:fixed; inset:0;
+      background:rgba(0,0,0,.72); z-index:400;
+      align-items:center; justify-content:center;
+    }
+    .edit-overlay.open { display:flex; }
+    .edit-modal-box {
+      background:#111f14; border:1px solid var(--border);
+      border-radius:18px; width:700px; max-width:96vw; max-height:90vh;
+      overflow-y:auto; padding:28px 28px 20px;
+    }
+    .edit-modal-title { font-size:17px; font-weight:800; color:var(--white); margin-bottom:20px; }
+    .edit-modal-grid {
+      display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:14px; margin-bottom:22px;
+    }
+    .edit-modal-grid .fg { margin:0; }
   </style>
 </head>
 <body>
@@ -617,6 +720,14 @@
         <input type="text" id="p-cidade" placeholder="Fortaleza">
       </div>
       <div class="fg">
+        <label>Telefone / WhatsApp</label>
+        <input type="text" id="p-telefone" placeholder="(85) 99999-9999">
+      </div>
+      <div class="fg">
+        <label>E-mail</label>
+        <input type="text" id="p-email" placeholder="contato@imobiliaria.com">
+      </div>
+      <div class="fg">
         <label id="p-porte-label">Porte</label>
         <select id="p-porte">
           <option value="">Selecione...</option>
@@ -774,17 +885,14 @@ const DEFAULT = {
 };
 
 // ═══════════════════════════════════════════════════════════
-// CONFIGURAÇÃO SUPABASE
+// PERSISTÊNCIA
 // ═══════════════════════════════════════════════════════════
-const SUPABASE_URL = 'https://sntycykjtktnzirypium.supabase.co';
+const SUPABASE_URL = 'https://sntycykjtktnzirypium.supabase.co'; 
 const SUPABASE_KEY = 'sb_publishable_D-dxJPaGFPSoxVLKa4uvIg_PO1K0uHc';
 const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-// ═══════════════════════════════════════════════════════════
-// PERSISTÊNCIA COM SUPABASE
-// ═══════════════════════════════════════════════════════════
+let DATA = JSON.parse(JSON.stringify(DEFAULT)); // Inicia vazio até carregar
 
-// Função para SALVAR no Supabase
 async function save(data) {
   try {
     const { error } = await supabaseClient
@@ -797,7 +905,6 @@ async function save(data) {
 
     if (error) throw error;
     
-    console.log("Sincronizado com Supabase ✓");
     // Backup no localStorage por segurança
     localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
   } catch (e) {
@@ -806,7 +913,6 @@ async function save(data) {
   }
 }
 
-// Função para CARREGAR do Supabase ao iniciar
 async function loadDataFromSupabase() {
   try {
     const { data, error } = await supabaseClient
@@ -1315,7 +1421,7 @@ function renderProspects(filter) {
   const list = activeFilter === 'todos' ? DATA.prospects : DATA.prospects.filter(p => p.etapa === activeFilter);
   const el = $('prospect-list');
 
-  const header = `<div class="p-row header-row"><div>Prospect / Empresa</div><div>Tipo / Local</div><div>Canal</div><div>Etapa</div><div>Temp.</div><div>Ação / Notas</div><div></div></div>`;
+  const header = `<div class="p-row header-row"><div>Prospect / Empresa</div><div>Tipo / Local</div><div>Canal</div><div>Etapa</div><div>Temp.</div><div>Próxima Ação</div><div></div></div>`;
 
   if (!list.length) {
     el.innerHTML = header + '<div class="tbl-empty">Nenhum prospect nesta categoria.</div>';
@@ -1329,14 +1435,15 @@ function renderProspects(filter) {
     const tipoLabel = p.tipo === 'correspondente' ? 'Correspondente' : 'Imobiliária';
     const tipoCls   = p.tipo === 'correspondente' ? 'badge-cb' : 'badge-imob';
     const localStr  = [p.cidade, p.estado].filter(Boolean).join('/') || '—';
-    return `<div class="p-row">
-    <div><div class="p-nome">${p.nome}</div><div class="p-imob">${p.imobiliaria||'—'}${p.porte?' · '+p.porte:''}</div></div>
-    <div><span class="badge ${tipoCls}">${tipoLabel}</span><div style="font-size:11px;color:var(--text-dim);margin-top:3px;">${localStr}</div></div>
+    const phoneTxt  = p.telefone ? `<div style="font-size:11px;color:var(--text-dim);margin-top:2px;">${p.telefone}</div>` : '';
+    return `<div class="p-row p-row-clickable" onclick="openProspectPanel(${p.id})">
+    <div><div class="p-nome">${esc(p.imobiliaria||p.nome)}</div><div class="p-imob">${esc(p.imobiliaria?p.nome:'')}${p.porte?' · '+p.porte:''}</div>${phoneTxt}</div>
+    <div><span class="badge ${tipoCls}">${tipoLabel}</span><div style="font-size:11px;color:var(--text-dim);margin-top:3px;">${esc(localStr)}</div></div>
     <div><span class="badge badge-abord">${canalLabel[p.canal]||p.canal}</span></div>
     <div>${etapaBadge(p.etapa)}</div>
     <div>${tempBadge(p.temperatura)}</div>
-    <div style="font-size:12px;color:var(--text);max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;" title="${p.proxima_acao||''}">${p.proxima_acao||'—'}</div>
-    <div class="p-actions">
+    <div style="font-size:12px;color:var(--text);max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;" title="${esc(p.proxima_acao||'')}">${esc(p.proxima_acao||'—')}</div>
+    <div class="p-actions" onclick="event.stopPropagation()">
       <button class="p-del-btn" onclick="advanceProspect(${p.id})" title="Avançar etapa">→</button>
       <button class="p-del-btn" onclick="deleteProspect(${p.id})" title="Remover">✕</button>
     </div>
@@ -1350,6 +1457,214 @@ function filterProspects(f, btn) {
   document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
   renderProspects(f);
+}
+
+// ─── ESCAPE HTML ───
+function esc(s) {
+  return String(s||'').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+// ─── LOG ETAPA → FUNIL DO DIA ───
+function logEtapaToFunil(etapa) {
+  const today = todayStr();
+  let entry = DATA.dailyLog.find(d => d.date === today);
+  if (!entry) {
+    entry = { date: today, ts: new Date().toISOString(), abordagens:0, respostas:0, qualificados:0, demos_ag:0, demos_real:0, propostas:0, fechamentos:0, notas:'' };
+    DATA.dailyLog.push(entry);
+  }
+  const fMap = { abordado:'abordagens', respondeu:'respostas', qualificado:'qualificados', agendado:'demos_ag', demo:'demos_real', proposta:'propostas', fechado:'fechamentos' };
+  const f = fMap[etapa];
+  if (f) entry[f] = (entry[f] || 0) + 1;
+  save(DATA);
+  // Atualiza aba Hoje se estiver visível
+  const tabHoje = document.getElementById('tab-hoje');
+  if (tabHoje && tabHoje.classList.contains('active')) renderHoje();
+  updateHeader();
+}
+
+// ─── DETAIL PANEL ───
+let currentPanelId = null;
+
+function openProspectPanel(id) {
+  const p = DATA.prospects.find(x => x.id === id);
+  if (!p) return;
+  currentPanelId = id;
+
+  const canalLabel = {whatsapp:'WhatsApp', instagram:'Insta DM', linkedin:'LinkedIn', meta_ads:'Meta Ads', indicacao:'Indicação', evento:'Evento', outro:'Outro'};
+  const tipoLabel  = p.tipo === 'correspondente' ? 'Correspondente' : 'Imobiliária';
+  const tipoCls    = p.tipo === 'correspondente' ? 'badge-cb' : 'badge-imob';
+  const companyName = p.imobiliaria || p.nome;
+  const contactName = p.imobiliaria ? p.nome : '';
+
+  // Header
+  document.getElementById('pp-header-content').innerHTML =
+    `<div class="p-panel-company">${esc(companyName)}</div>
+     ${contactName ? `<div class="p-panel-contact">${esc(contactName)}</div>` : ''}
+     <div class="p-panel-badges">
+       <span class="badge ${tipoCls}">${tipoLabel}</span>
+       ${etapaBadge(p.etapa)}
+       ${tempBadge(p.temperatura)}
+     </div>`;
+
+  // Histórico de etapas
+  const hist = (p.historico || []).slice().reverse();
+  const histHtml = hist.length
+    ? hist.map((h, i) => `
+        <div class="p-panel-hist-item">
+          <div class="p-panel-hist-dot${i > 0 ? ' dot-dim' : ''}"></div>
+          <span>${etapaLabel(h.etapa)} &mdash; ${h.data}</span>
+        </div>`).join('')
+    : `<div style="font-size:12px;color:var(--text-dim)">Nenhum histórico registrado ainda.</div>`;
+
+  // Body
+  document.getElementById('pp-body').innerHTML = `
+    ${p.proxima_acao ? `
+      <div class="p-panel-next-action">
+        <div class="p-panel-next-action-lbl">📌 Próxima Ação</div>
+        <div class="p-panel-next-action-val">${esc(p.proxima_acao)}</div>
+      </div>` : ''}
+
+    ${p.notas ? `<div class="p-panel-notes">💬 ${esc(p.notas)}</div>` : ''}
+
+    <div class="p-panel-section">
+      <div class="p-panel-section-title">Dados de Contato</div>
+      ${p.telefone ? `
+        <div class="p-panel-row">
+          <span class="p-panel-row-lbl">Telefone</span>
+          <span class="p-panel-row-val">
+            <a href="https://wa.me/55${p.telefone.replace(/\D/g,'')}" target="_blank">${esc(p.telefone)}</a>
+          </span>
+        </div>` : ''}
+      ${p.email ? `
+        <div class="p-panel-row">
+          <span class="p-panel-row-lbl">E-mail</span>
+          <span class="p-panel-row-val"><a href="mailto:${esc(p.email)}">${esc(p.email)}</a></span>
+        </div>` : ''}
+      <div class="p-panel-row">
+        <span class="p-panel-row-lbl">Cidade / UF</span>
+        <span class="p-panel-row-val">${esc([p.cidade, p.estado].filter(Boolean).join(' / ') || '—')}</span>
+      </div>
+      <div class="p-panel-row">
+        <span class="p-panel-row-lbl">Porte</span>
+        <span class="p-panel-row-val">${esc(p.porte || '—')}</span>
+      </div>
+      <div class="p-panel-row">
+        <span class="p-panel-row-lbl">Origem</span>
+        <span class="p-panel-row-val">${esc(canalLabel[p.canal] || p.canal || '—')}</span>
+      </div>
+      <div class="p-panel-row">
+        <span class="p-panel-row-lbl">Adicionado em</span>
+        <span class="p-panel-row-val">${esc(p.data || '—')}</span>
+      </div>
+    </div>
+
+    <div class="p-panel-section">
+      <div class="p-panel-section-title">Histórico de Etapas</div>
+      ${histHtml}
+    </div>`;
+
+  // Botões de ação
+  const isLastEtapa = ETAPA_ORDER.indexOf(p.etapa) >= ETAPA_ORDER.length - 1;
+  const canAdvance  = !isLastEtapa && p.etapa !== 'perdido';
+  document.getElementById('pp-actions').innerHTML = `
+    <button class="btn btn-ghost btn-sm" onclick="editProspect(${id})">✏️ Editar</button>
+    ${canAdvance ? `<button class="btn btn-primary btn-sm" onclick="advanceProspect(${id})">Avançar →</button>` : ''}
+    <button class="btn btn-sm" style="background:rgba(239,68,68,.15);border:1px solid rgba(239,68,68,.3);color:#f87171;margin-left:auto;" onclick="deleteProspect(${id})">Remover</button>`;
+
+  document.getElementById('p-overlay').classList.add('open');
+  document.getElementById('p-panel').classList.add('open');
+}
+
+function closeProspectPanel() {
+  document.getElementById('p-overlay').classList.remove('open');
+  document.getElementById('p-panel').classList.remove('open');
+  currentPanelId = null;
+}
+
+// ─── EDIT MODAL ───
+let editingId = null;
+
+function editProspect(id) {
+  const p = DATA.prospects.find(x => x.id === id);
+  if (!p) return;
+  editingId = id;
+
+  const selOpts = (elId, opts, cur) =>
+    `<select id="edit-${elId}">${opts.map(o =>
+      `<option value="${esc(o.v)}"${o.v === cur ? ' selected' : ''}>${esc(o.l)}</option>`
+    ).join('')}</select>`;
+
+  const canalOpts = [
+    {v:'whatsapp',l:'WhatsApp'},{v:'instagram',l:'Instagram DM'},{v:'linkedin',l:'LinkedIn'},
+    {v:'meta_ads',l:'Meta Ads'},{v:'indicacao',l:'Indicação'},{v:'evento',l:'Evento'},{v:'outro',l:'Outro'}
+  ];
+  const etapaOpts = [
+    {v:'abordado',l:'Abordado'},{v:'respondeu',l:'Respondeu'},{v:'qualificado',l:'Qualificado'},
+    {v:'agendado',l:'Demo Agendada'},{v:'demo',l:'Demo Realizada'},{v:'proposta',l:'Proposta Enviada'},
+    {v:'fechado',l:'Fechado'},{v:'perdido',l:'Perdido'}
+  ];
+  const tempOpts = [{v:'quente',l:'Quente'},{v:'morno',l:'Morno'},{v:'frio',l:'Frio'}];
+  const porteOpts = [{v:'',l:'Selecione...'},{v:'1-4',l:'1-4'},{v:'5-10',l:'5-10'},{v:'11-20',l:'11-20'},{v:'20+',l:'20+'}];
+  const tipoOpts  = [{v:'imobiliaria',l:'Imobiliária'},{v:'correspondente',l:'Correspondente'}];
+
+  document.getElementById('edit-modal-grid').innerHTML = `
+    <div class="fg"><label>Responsável</label><input type="text" id="edit-nome" value="${esc(p.nome)}"></div>
+    <div class="fg"><label>Nome da Empresa</label><input type="text" id="edit-imob" value="${esc(p.imobiliaria||'')}"></div>
+    <div class="fg"><label>Telefone / WhatsApp</label><input type="text" id="edit-telefone" value="${esc(p.telefone||'')}"></div>
+    <div class="fg"><label>E-mail</label><input type="text" id="edit-email" value="${esc(p.email||'')}"></div>
+    <div class="fg"><label>Cidade</label><input type="text" id="edit-cidade" value="${esc(p.cidade||'')}"></div>
+    <div class="fg"><label>Estado (UF)</label><input type="text" id="edit-estado" value="${esc(p.estado||'')}" maxlength="2" style="text-transform:uppercase"></div>
+    <div class="fg"><label>Tipo</label>${selOpts('tipo', tipoOpts, p.tipo)}</div>
+    <div class="fg"><label>Porte</label>${selOpts('porte', porteOpts, p.porte)}</div>
+    <div class="fg"><label>Canal / Origem</label>${selOpts('canal', canalOpts, p.canal)}</div>
+    <div class="fg"><label>Etapa</label>${selOpts('etapa', etapaOpts, p.etapa)}</div>
+    <div class="fg"><label>Temperatura</label>${selOpts('temperatura', tempOpts, p.temperatura)}</div>
+    <div class="fg" style="grid-column:1/-1"><label>Próxima Ação</label><input type="text" id="edit-proxima_acao" value="${esc(p.proxima_acao||'')}"></div>
+    <div class="fg" style="grid-column:1/-1"><label>Notas / Observações</label><input type="text" id="edit-notas" value="${esc(p.notas||'')}"></div>`;
+
+  document.getElementById('edit-overlay').classList.add('open');
+}
+
+function saveEditProspect() {
+  const p = DATA.prospects.find(x => x.id === editingId);
+  if (!p) return;
+  const oldEtapa = p.etapa;
+  const newEtapa = document.getElementById('edit-etapa').value;
+
+  p.nome         = document.getElementById('edit-nome').value.trim();
+  p.imobiliaria  = document.getElementById('edit-imob').value.trim();
+  p.telefone     = document.getElementById('edit-telefone').value.trim();
+  p.email        = document.getElementById('edit-email').value.trim();
+  p.cidade       = document.getElementById('edit-cidade').value.trim();
+  p.estado       = document.getElementById('edit-estado').value.toUpperCase().trim();
+  p.tipo         = document.getElementById('edit-tipo').value;
+  p.porte        = document.getElementById('edit-porte').value;
+  p.canal        = document.getElementById('edit-canal').value;
+  p.etapa        = newEtapa;
+  p.temperatura  = document.getElementById('edit-temperatura').value;
+  p.proxima_acao = document.getElementById('edit-proxima_acao').value.trim();
+  p.notas        = document.getElementById('edit-notas').value.trim();
+
+  // Se etapa avançou, loga no funil e registra no histórico
+  if (newEtapa !== oldEtapa) {
+    const oldIdx = ETAPA_ORDER.indexOf(oldEtapa);
+    const newIdx = ETAPA_ORDER.indexOf(newEtapa);
+    if (newIdx > oldIdx) logEtapaToFunil(newEtapa);
+    if (!p.historico) p.historico = [];
+    p.historico.push({ etapa: newEtapa, data: todayStr(), ts: Date.now() });
+  }
+
+  save(DATA);
+  closeEditModal();
+  renderProspects();
+  // Atualiza o painel aberto se for o mesmo prospect
+  if (currentPanelId === editingId) openProspectPanel(editingId);
+  editingId = null;
+}
+
+function closeEditModal() {
+  document.getElementById('edit-overlay').classList.remove('open');
+  editingId = null;
 }
 
 function updatePorteOptions() {
@@ -1370,6 +1685,7 @@ function updatePorteOptions() {
 function addProspect() {
   const nome = $('p-nome').value.trim();
   if (!nome) { $('p-nome').focus(); return; }
+  const etapa = $('p-etapa').value;
   const estado = ($('p-estado').value || '').toUpperCase().trim();
   const p = {
     id: Date.now(),
@@ -1378,17 +1694,22 @@ function addProspect() {
     imobiliaria: $('p-imob').value.trim(),
     estado: estado,
     cidade: $('p-cidade').value.trim(),
+    telefone: $('p-telefone').value.trim(),
+    email: $('p-email').value.trim(),
     porte: $('p-porte').value,
     canal: $('p-canal').value,
-    etapa: $('p-etapa').value,
+    etapa: etapa,
     temperatura: $('p-temp').value,
     proxima_acao: $('p-acao').value.trim(),
     notas: $('p-notas').value.trim(),
-    data: todayStr()
+    data: todayStr(),
+    ts: Date.now(),
+    historico: [{ etapa: etapa, data: todayStr(), ts: Date.now() }]
   };
   DATA.prospects.push(p);
+  logEtapaToFunil(etapa);
   save(DATA);
-  ['p-nome','p-imob','p-estado','p-cidade','p-acao','p-notas'].forEach(id => $(id).value='');
+  ['p-nome','p-imob','p-estado','p-cidade','p-telefone','p-email','p-acao','p-notas'].forEach(id => $(id).value='');
   $('p-tipo').selectedIndex=0; $('p-porte').selectedIndex=0; $('p-canal').selectedIndex=0; $('p-etapa').selectedIndex=0; $('p-temp').selectedIndex=0;
   const ok = $('p-save-ok');
   ok.style.display='inline'; setTimeout(()=>ok.style.display='none',2000);
@@ -1399,6 +1720,7 @@ function deleteProspect(id) {
   if (!confirm('Remover este prospect?')) return;
   DATA.prospects = DATA.prospects.filter(p => p.id !== id);
   save(DATA);
+  if (currentPanelId === id) closeProspectPanel();
   renderProspects();
 }
 
@@ -1408,9 +1730,15 @@ function advanceProspect(id) {
   if (!p) return;
   const idx = ETAPA_ORDER.indexOf(p.etapa);
   if (idx < ETAPA_ORDER.length - 1) {
-    p.etapa = ETAPA_ORDER[idx + 1];
+    const newEtapa = ETAPA_ORDER[idx + 1];
+    p.etapa = newEtapa;
+    if (!p.historico) p.historico = [];
+    p.historico.push({ etapa: newEtapa, data: todayStr(), ts: Date.now() });
+    logEtapaToFunil(newEtapa);
     save(DATA);
     renderProspects();
+    // Se o painel deste prospect estiver aberto, atualiza
+    if (currentPanelId === id) openProspectPanel(id);
   }
 }
 
@@ -1937,20 +2265,51 @@ const charts = [];
 window.addEventListener('resize', () => charts.forEach(c => { try { c.resize(); } catch(e){} }));
 
 // ═══════════════════════════════════════════════════════════
-// INIT (COM SUPABASE)
+// INIT
 // ═══════════════════════════════════════════════════════════
 document.addEventListener('DOMContentLoaded', async () => {
-  // Mostra um "Carregando" opcional se desejar
+  // Puxa os dados do Supabase
   DATA = await loadDataFromSupabase();
 
   updateHeader();
   renderHoje();
-  renderProspects();
-  checkBackupStatus();
+  renderProspects(); 
+  checkBackupStatus(); 
   
-  // Atualiza os gráficos para garantir que os dados aparecerão
+  // Atualiza os gráficos da aba principal
   if (currentTab === 'hoje') renderHoje();
-})
+});
+
+// Atualização ao vivo — só KPIs, nunca toca nos inputs
+['f-abord','f-resp','f-qual','f-ag','f-demo','f-prop','f-fech'].forEach(id => {
+  const el = document.getElementById(id);
+  if (el) el.addEventListener('input', liveUpdateKPIs);
+});
 </script>
+
+<!-- ═══════ PROSPECT DETAIL PANEL ═══════ -->
+<div id="p-overlay" class="p-overlay" onclick="closeProspectPanel()"></div>
+<div id="p-panel" class="p-panel">
+  <div class="p-panel-header">
+    <div id="pp-header-content" style="flex:1;min-width:0;"></div>
+    <button class="p-panel-close" onclick="closeProspectPanel()">✕</button>
+  </div>
+  <div class="p-panel-body" id="pp-body"></div>
+  <div class="p-panel-actions" id="pp-actions"></div>
+</div>
+
+<!-- ═══════ EDIT MODAL ═══════ -->
+<div id="edit-overlay" class="edit-overlay" onclick="if(event.target===this)closeEditModal()">
+  <div class="edit-modal-box">
+    <div class="edit-modal-title">✏️ Editar Prospect</div>
+    <div class="edit-modal-grid" id="edit-modal-grid"></div>
+    <div class="form-actions">
+      <button class="btn btn-primary" onclick="saveEditProspect()">Salvar Alterações</button>
+      <button class="btn btn-ghost" onclick="closeEditModal()">Cancelar</button>
+    </div>
+  </div>
+</div>
+
 </body>
 </html>
+
