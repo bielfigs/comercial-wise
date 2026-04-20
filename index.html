@@ -933,7 +933,10 @@ async function loadDataFromSupabase() {
 // UTILIDADES
 // ═══════════════════════════════════════════════════════════
 const $ = id => document.getElementById(id);
-const todayStr = () => new Date().toISOString().slice(0,10);
+const todayStr = () => {
+  const d = new Date();
+  return new Date(d.getTime() - (d.getTimezoneOffset() * 60000)).toISOString().slice(0,10);
+};
 const fmtDate = s => {
   const d = new Date(s + 'T12:00:00');
   return d.toLocaleDateString('pt-BR', {day:'2-digit', month:'short', weekday:'short'});
@@ -1052,11 +1055,11 @@ function renderHoje() {
     $('f-prop').value  = todayLog.propostas  || '';
     $('f-fech').value  = todayLog.fechamentos || '';
     $('f-notas').value = todayLog.notas || '';
-  } else {
+ } else {
     const hour = new Date().getHours();
-    if (hour >= 10) {
+    if (hour >= 9) { // O alerta agora fica vermelho só no fim do dia (a partir das 18h)
       $('today-alert').className = 'alert alert-red';
-      $('today-alert-text').textContent = 'Gabriel ainda não registrou o dia de hoje. Lembrar de preencher antes das 18h.';
+      $('today-alert-text').textContent = 'Gabriel ainda não registrou o dia de hoje. Lembrar de preencher antes das 17:59.';
     } else {
       $('today-alert').className = 'alert alert-verde';
       $('today-alert-text').textContent = 'Gabriel ainda não registrou hoje. Use o formulário abaixo para registrar as atividades.';
@@ -2309,6 +2312,10 @@ document.addEventListener('DOMContentLoaded', async () => {
     </div>
   </div>
 </div>
+
+</body>
+</html>
+
 
 </body>
 </html>
